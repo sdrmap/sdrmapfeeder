@@ -2,7 +2,7 @@
 export LANG=C.UTF-8
 source /etc/default/sdrmapfeeder
 
-version='4.0'
+version='4.2'
 sysinfolastrun=0
 radiosondelastrun=0
 
@@ -35,7 +35,9 @@ while true; do
 		},\
 		\"packages\":{\
 			\"c2isrepo\":\"$(cat /etc/apt/sources.list.d/*|grep -c 'https://repo.chaos-consulting.de')\",\
+   			\"sdrmaprepo\":\"$(cat /etc/apt/sources.list.d/*|grep -c 'https://repo.sdrmap.org')\",\
 			\"mlat-client-c2is\":\"$(dpkg -s mlat-client-c2is 2>&1|grep 'Version:'|cut -d ' ' -f 2)\",\
+   			\"mlat-client-sdrmap\":\"$(dpkg -s mlat-client-sdrmap 2>&1|grep 'Version:'|cut -d ' ' -f 2)\",\
 			\"stunnel4\":\"$(dpkg -s stunnel4 2>&1|grep 'Version:'|cut -d ' ' -f 2)\",\
 			\"dump1090-mutability\":\"$(dpkg -s dump1090-mutability 2>&1|grep 'Version:'|cut -d ' ' -f 2)\",\
 			\"dump1090-fa\":\"$(dpkg -s dump1090-fa 2>&1|grep 'Version:'|cut -d ' ' -f 2)\",\
