@@ -43,7 +43,7 @@ while true; do
 			},\
 			\"uptime\":\"$(cat /proc/uptime |cut -d ' ' -f 1)\",\
 			\"os\":{\
-				\"kernel\":\"$(uname -r)\"\,\
+				\"kernel\":\"$(uname -r)\",\
 				\"version:\":\"$(hostnamectl |grep 'Operating System'|cut -d ':' -f 2|awk '{$1=$1};1')\",\
 				\"arch\":\"$(hostnamectl |grep 'Architecture'|cut -d ':' -f 2|awk '{$1=$1};1')\"
 			},\
