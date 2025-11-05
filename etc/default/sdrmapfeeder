@@ -2,7 +2,8 @@
 username="yourusername"
 password="yourpassword"
 
-#Set your location if you want your station to appear on the map. This will override the privacy flag and any given location in the mlat-feeder if set to true.
+#Set your location if you want your station to appear on the map. This will override the privacy flag in the mlat-feeder if set to true.
+#You have to enable sysinfo feeding for this to work.
 position=false
 #lat=
 #lon=
