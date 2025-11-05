@@ -7,6 +7,11 @@ position=false
 #lat=
 #lon=
 
+#Set to true if you want to share your exact location provided by GPS. Location feeding has to be enabled above - the location provided there will be used as a backup.
+#You will need a working gpsd and gpspipe (from gpsd-clients) and jq installed for this to work.
+#This feature is experimental.
+#gps=false
+
 #Sysinfo
 #Set to false if you do not want to transmit system info like os, software version or cpu type
 sysinfo=true
