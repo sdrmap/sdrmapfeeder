@@ -37,6 +37,10 @@ while true; do
 				\"free\":\"$(cat /proc/meminfo |grep 'MemFree:'|cut -d ':' -f 2|awk '{$1=$1};1')\",\
 				\"available\":\"$(cat /proc/meminfo |grep 'MemAvailable:'|cut -d ':' -f 2|awk '{$1=$1};1')\"\
 			},\
+			\"devices\":{\
+				\"rtlsdr\":\"$(lsusb | grep -c '0bda:283[28]'"\",\
+				\"airspy\":\"$(lsusb | grep -c '1d50:60a1')\"
+			},\
 			\"uptime\":\"$(cat /proc/uptime |cut -d ' ' -f 1)\",\
 			\"os\":{\
 				\"kernel\":\"$(uname -r)\"\,\
