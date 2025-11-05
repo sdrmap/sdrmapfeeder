@@ -46,6 +46,11 @@ while true; do
 			\"ais-catcher\":\"$(dpkg -s ais-catcher 2>&1 |grep 'Version:'|cut -d ' ' -f 2)\",\
    			\"radiosondeautorxr\":\"$(dpkg -s radiosondeautorx 2>&1 |grep 'Version:'|cut -d ' ' -f 2)\"\
 		},\
+		\"position\":{\
+			\"enabled\":\"$position\",\
+			\"lat\":\"$($position && echo $lat)\",\
+			\"lon\":\"$($position && echo $lon)\"
+		},\
 		\"feeder\":{\
 			\"version\":\"$version\",\
 			\"interval\":\"$sysinfointerval\"
