@@ -12,6 +12,14 @@ if [[ -z $username ]] || [[ -z $password ]] || [[ $username == "yourusername" ]]
 	exit 1
 fi
 
+if $gps && command -v gpspipe >/dev/null 2>&1 && command -v jq >/dev/null 2>&1; then
+	s=$(gpspipe -w -n 10|grep -m 1 lat)
+	if [ $? -eq 0 ]; then
+		gpsLat=$(echo $s|jq '.lat')
+		gpsLon=$(echo $s|jq '.lon')
+	fi
+fi
+
 while true; do
 	if [ sysinfo=='true' ] && [ $(($(date +"%s") - $sysinfolastrun)) -ge "$sysinfointerval" ]
 		then
@@ -48,8 +56,8 @@ while true; do
 		},\
 		\"position\":{\
 			\"enabled\":\"$position\",\
-			\"lat\":\"$($position && echo $lat)\",\
-			\"lon\":\"$($position && echo $lon)\"
+			\"lat\":\"$($position && $(echo $gpsLat || echo $lat))\",\
+			\"lon\":\"$($position && $(echo $gpsLon || echo $lon))\"
 		},\
 		\"feeder\":{\
 			\"version\":\"$version\",\
