@@ -13,10 +13,10 @@ if [[ -z $username ]] || [[ -z $password ]] || [[ $username == "yourusername" ]]
 fi
 
 while true; do
-	if $sysinfo && [ $(($(date +"%s") - $sysinfolastrun)) -ge "$sysinfointerval" ]; then
+	if [ "$sysinfo" = "true" ] && [ $(($(date +"%s") - $sysinfolastrun)) -ge "$sysinfointerval" ]; then
 		sysinfolastrun=$(date +"%s")
 		
-		if $gps && command -v gpspipe >/dev/null 2>&1 && command -v jq >/dev/null 2>&1; then
+		if [ "$gps" = "true" ] && command -v gpspipe >/dev/null 2>&1 && command -v jq >/dev/null 2>&1; then
 			s=$(gpspipe -w -n 10|grep -m 1 lat)
 			if [ $? -eq 0 ]; then
 				gpsLat=$(echo $s|jq '.lat')
@@ -70,21 +70,21 @@ while true; do
 		}"| gzip -c |curl -s -u $username:$password -X POST -H "Content-type: application/json" -H "Content-encoding: gzip" --data-binary @- https://sys.feed.sdrmap.org/index.php
 	fi;
 
-	if $adsb; then
+	if [ "$adsb" = "true" ]; then
 			gzip -c $adsbpath | curl -s -u $username:$password -X POST -H "Content-type: application/json" -H "Content-encoding: gzip" --data-binary @- https://adsb.feed.sdrmap.org/index.php
-	fi;
+	fi
 	
-	if $radiosonde && [ $(($(date +"%s") - $radiosondelastrun)) -ge "$radiosondeinterval" ]; then
+	if [ "$radiosonde" = "true" ] && [ $(($(date +"%s") - $radiosondelastrun)) -ge "$radiosondeinterval" ]; then
 		radiosondelastrun=$(date +"%s")
 		if [ ! -d "$radiosondepath" ]; then
 			echo "The log directory '$radiosondepath' doesn't exist."
 			exit 1
-		fi;
+		fi
 		for i in $(find $radiosondepath -mmin -0.1 -name "*sonde.log");
 			do
 			tail -n 1 $i | gzip | curl -s -u $username:$password -X POST -H "Content-type: application/json" -H "Content-encoding: gzip" --data-binary @- https://radiosonde.feed.sdrmap.org/index.php
-		done;
-	fi;
+		done
+	fi
 
-	sleep 1;
-done;
+	sleep 1
+done
