@@ -1,23 +1,36 @@
-#Edit username an password here
+### Credentials
+# Edit username an password here
 username="yourusername"
 password="yourpassword"
 
-
-#Sysinfo
-#Set to false if you do not want to transmit system info like os, software version or cpu type
+### Sysinfo
+# Set to false if you do not want to transmit system info like os, software version or cpu type
 sysinfo=true
 sysinfointerval=30
 
+### Location
+# Set your location if you want your station to appear on the map. This will override the privacy flag in the mlat-feeder if set to true.
+# You have to enable sysinfo feeding for this to work.
+position=false
+#lat=
+#lon=
 
-#ADS-B
+### GPS Location
+# Set to true if you want to share your exact location provided by GPS. Location feeding has to be enabled above - the location provided there will be used as a backup.
+# You will need a working gpsd and gpspipe (from gpsd-clients) and jq installed for this to work.
+# The positon will be updated within the sysinfointerval given above (default: 30s).
+# This feature is experimental.
+#gps=false
+
+### ADS-B
 #adsb=true
 
-#You can change the path to the aircraft.json here which is not needed if you followed our tutorial. If you are using an already existing setup you may need to alter this.
+# You can change the path to the aircraft.json here which is not needed if you followed our tutorial. If you are using an already existing setup you may need to alter this.
 #adsbpath='/run/dump1090-mutability/aircraft.json'; #dump1090-mutability
 adsbpath="/run/dump1090-fa/aircraft.json"
 
 
-#Radiosonde
+### Radiosonde
 #radiosonde=true
 radiosondeinterval=3
 
