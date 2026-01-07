@@ -2,7 +2,7 @@
 export LANG=C.UTF-8
 source /etc/default/sdrmapfeeder
 
-version='4.2'
+version='4.2.1'
 sysinfolastrun=0
 radiosondelastrun=0
 
