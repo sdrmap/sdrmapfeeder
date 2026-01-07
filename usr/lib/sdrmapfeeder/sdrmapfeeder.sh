@@ -60,8 +60,8 @@ while true; do
 			},\
 			\"position\":{\
 				\"enabled\":\"$position\",\
-				\"lat\":\"$([[ $position = 'true' ]] && ([[ ! -z ${gpsLat+x} ]] && echo $gpsLat || echo $lat))\",\
-				\"lon\":\"$([[ $position = 'true' ]] && ([[ ! -z ${gpsLon+x} ]] && echo $gpsLon || echo $lon))\"
+				\"lat\":\"$([[ "$position" == 'true' ]] && ([[ ! -z ${gpsLat+x} ]] && echo $gpsLat || echo $lat))\",\
+				\"lon\":\"$([[ "$position" == 'true' ]] && ([[ ! -z ${gpsLon+x} ]] && echo $gpsLon || echo $lon))\"
 			},\
 			\"feeder\":{\
 				\"version\":\"$version\",\
