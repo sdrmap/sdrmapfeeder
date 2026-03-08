@@ -73,7 +73,11 @@ while true; do
 	if [[ "$adsb" == 'true' ]]; then
 			gzip -c $adsbpath | curl -s -u $username:$password -X POST -H "Content-type: application/json" -H "Content-encoding: gzip" --data-binary @- https://adsb.feed.sdrmap.org/index.php
 	fi
-
+	
+	if [[ "$uat" == 'true' ]]; then
+			gzip -c $uatpath | curl -s -u $username:$password -X POST -H "Content-type: application/json" -H "Content-encoding: gzip" --data-binary @- https://uat.feed.sdrmap.org/index.php
+	fi
+	
 	if [[ "$radiosonde" == 'true' ]] && [[ $(($(date +"%s") - $radiosondelastrun)) -ge "$radiosondeinterval" ]]; then
 		radiosondelastrun=$(date +"%s")
 		if [[ ! -d "$radiosondepath" ]]; then
